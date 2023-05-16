@@ -1,5 +1,5 @@
 import { AppBar, Tab, Tabs, Toolbar, Typography, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 
@@ -7,12 +7,17 @@ const Header = () => {
   const logoStyle = {
     height: "7rem",
   };
+
+  const logobtnStyle = {
+    padding: "0",
+  };
   const toolbarStyle = {
     backgroundColor: "#1565c0",
   };
 
   const tabsStyle = {
     marginLeft: "auto",
+    backgroundColor: "#1565c0",
   };
   const tabStyle = {
     fontFamily: "Raleway",
@@ -25,7 +30,7 @@ const Header = () => {
   };
   const buttonStyle = {
     backgroundColor: "#ff9800",
-    color: "#fff",
+    color: "#ffflight",
     borderRadius: "50px",
     marginLeft: "50px",
     marginRight: "25px",
@@ -39,10 +44,33 @@ const Header = () => {
     setValue(value);
   };
 
+  useEffect(() => {
+    if (window.location.pathname === "/" && value !== 0) {
+      setValue(0);
+    } else if (window.location.pathname === "/services" && value !== 1) {
+      setValue(1);
+    } else if (window.location.pathname === "/revolution" && value !== 2) {
+      setValue(2);
+    } else if (window.location.pathname === "/about" && value !== 3) {
+      setValue(3);
+    } else if (window.location.pathname === "/contact" && value !== 4) {
+      setValue(4);
+    } else if (window.location.pathname === "/estimate" && value !== 5) {
+      setValue(5);
+    }
+  }, [value]);
+
   return (
     <AppBar position="static">
       <Toolbar disableGutters style={toolbarStyle}>
-        <img style={logoStyle} alt="company logo" src={logo} />
+        <Button
+          style={logobtnStyle}
+          component={Link}
+          to="/"
+          onClick={() => setValue(0)}
+        >
+          <img style={logoStyle} alt="company logo" src={logo} />
+        </Button>
         <Tabs
           style={tabsStyle}
           value={value}
