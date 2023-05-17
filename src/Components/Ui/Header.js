@@ -1,4 +1,13 @@
-import { AppBar, Tab, Tabs, Toolbar, Typography, Button } from "@mui/material";
+import {
+  AppBar,
+  Tab,
+  Tabs,
+  Toolbar,
+  Typography,
+  Button,
+  MenuItem,
+  Menu,
+} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
@@ -40,8 +49,21 @@ const Header = () => {
   };
 
   const [value, setValue] = useState(0);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+
   const handleChange = (e, value) => {
     setValue(value);
+  };
+
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+    setOpen(true);
+  };
+
+  const handleClose = (e) => {
+    setAnchorEl(null);
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -79,8 +101,11 @@ const Header = () => {
         >
           <Tab style={tabStyle} component={Link} to="/" label="Home" />
           <Tab
+            arial-owns={anchorEl ? "simple-mennu" : undefined}
+            aria-haspopup={anchorEl ? "true" : undefined}
             style={tabStyle}
             component={Link}
+            onClick={event => handleClick(event)}
             to="/services"
             label="Services"
           />
@@ -106,6 +131,16 @@ const Header = () => {
         >
           Free Estimate
         </Button>
+        <Menu
+          id="simple-menu"
+          archorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Custom Software Development</MenuItem>
+          <MenuItem onClick={handleClose}> Mobile App Development</MenuItem>
+          <MenuItem onClick={handleClose}> Website Development</MenuItem>
+        </Menu>
       </Toolbar>
     </AppBar>
   );
