@@ -6,14 +6,18 @@ import Estimate from "./Components/Estimate";
 import Revolution from "./Components/Revolution";
 import Services from "./Components/Services";
 import Footer from "./Components/Ui/Footer";
-import Landing from "./Components/Landing";
+import LandingPage from "./Components/LandingPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" Component={() => <div><Landing/></div>} />
+        <Route
+          path="/"
+          element={ <LandingPage />}
+          
+        />
         <Route path="/services" element={<Services />} />
         <Route
           path="/customsoftware"
@@ -26,7 +30,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/estimate" element={<Estimate />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }

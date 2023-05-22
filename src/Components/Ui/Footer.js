@@ -69,7 +69,7 @@ const Footer = () => {
 
         <Grid item style={gridItemStyle}>
           <Grid container direction="column" spacing={2}>
-            <Grid item style={itemLink} component={Link} to="/services">
+            <Grid item style={itemLk} component={Link} to="/services">
               Services
             </Grid>
             <Grid item style={itemLk}>
