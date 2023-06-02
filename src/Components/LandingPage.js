@@ -133,8 +133,8 @@ const LandingPage = () => {
     position: "absolute",
     boxShadow: "10",
     borderRadius: "15px",
-    padding: "4em",
-    marginTop: "-43rem",
+    padding: "10em",
+    marginTop: "-13rem",
   };
   const revolutionStyle = {
     backgroundImage: `url(${revolutionBackground})`,
@@ -150,6 +150,22 @@ const LandingPage = () => {
     fontFamily: "pacifico",
     fontWeight: 800,
     fontSize: "2.7rem",
+  };
+
+  //info style//
+  const infoStyle = {
+    backgroundImage: `url(${infoBackground})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    height: "90em",
+    width: "90em%",
+  };
+  //contact-style//
+  const contactStyle = {
+    alignItems: "center",
+    marginLeft: "59rem",
+    marginTop: "17rem",
   };
   const defaultOptions = {
     loop: true,
@@ -353,19 +369,16 @@ const LandingPage = () => {
           {/*-----Information Block-----*/}
           <Grid
             container
-            style={{ height: "80em" }}
+            sx={{ height: "80em" }}
             alignItems="center"
             direction="row"
+            style={infoStyle}
           >
             <Grid item container direction="row">
               <Grid item>
-                <Grid container direction="column">
-                  <Typography variant="h2" style={{ color: "white" }}>
-                    About Us
-                  </Typography>
-                  <Typography variant="subtitle2">
-                    Let's get personal.
-                  </Typography>
+                <Grid container direction="column" sx={{ marginTop: "15rem" }}>
+                  <Typography variant="h2">About Us</Typography>
+                  <Typography variant="body1">Let's get personal.</Typography>
                   <Grid item>
                     <Button
                       component={Link}
@@ -375,6 +388,37 @@ const LandingPage = () => {
                       // className={classes.learnButton}
                     >
                       <span style={{ marginRight: 10 }}>Learn More</span>
+                      <ArrowForwardIcon width={10} height={10} fill="white" />
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item>
+                <Grid
+                  container
+                  direction="column"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                >
+                  <Typography variant="h2" style={contactStyle}>
+                    Contact Us
+                  </Typography>
+                  <Typography variant="body1" sx={{ marginLeft: "55rem" }}>
+                    Say hello!{" "}
+                    <span role="img" aria-label="waving hand">
+                      👋🏻
+                    </span>
+                  </Typography>
+                  <Grid item>
+                    <Button
+                      component={Link}
+                      to="/about"
+                      variant="outlined"
+                      style={{ color: "white", borderColor: "white" }}
+                      // className={classes.learnButton}
+                    >
+                      <span sx={{ marginLeft: "55rem" }}>Learn More</span>
                       <ArrowForwardIcon width={10} height={10} fill="white" />
                     </Button>
                   </Grid>
