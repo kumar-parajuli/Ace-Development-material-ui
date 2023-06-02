@@ -36,7 +36,7 @@ const Header = () => {
     fontFamily: "Raleway",
     textTransform: "none",
     fontWeight: "600",
-    fontSize: "1rem",
+    fontSize: "1.3rem",
     color: "#fff",
     minWidth: "10",
     marginLeft: "25px",
@@ -52,7 +52,7 @@ const Header = () => {
     marginLeft: "50px",
     marginRight: "25px",
     fontFamily: "pacifico",
-    fontSize: "1rem",
+    fontSize: "1.3rem",
     textTransform: "none",
   };
   const paperStyle = {

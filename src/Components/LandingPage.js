@@ -10,12 +10,14 @@ import websitesIcon from "../assets/websiteIcon.svg";
 import revolutionBackground from "../assets/repeatingBackground.svg";
 import infoBackground from "../assets/infoBackground.svg";
 import { shadows } from "@mui/system";
+import CallToAction from "./Ui/CallToAction";
 
 const LandingPage = () => {
   const buttonStyle = {
     backgroundColor: "#ff9800",
     color: "#ffflight",
     borderRadius: "50px",
+    marginTop: "10px",
     marginLeft: "50px",
     marginRight: "25px",
     fontFamily: "pacifico",
@@ -33,6 +35,7 @@ const LandingPage = () => {
     height: "50px",
     width: "145px",
     marginLeft: "4rem",
+    marginTop: "10px",
   };
   const typographyStyle = {
     marginTop: "0.5em",
@@ -95,8 +98,8 @@ const LandingPage = () => {
     marginBottom: "1em",
     color: "black",
     marginTop: "0.5rem",
-    fontSize: "1.25rem",
-    fontWeight: 300,
+    fontSize: "1.5rem",
+    fontWeight: 400,
   };
   const buttonStyle2 = {
     color: "#1565c0",
@@ -158,14 +161,52 @@ const LandingPage = () => {
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    height: "90em",
-    width: "90em%",
+    height: "80em",
+    width: "85em%",
   };
+  //about btn style//
+  const aboutbtnStyle = {
+    marginLeft: "5rem",
+    color: "#fff",
+    borderColor: "#fff",
+    fontSize: "1.3rem",
+    fontWeight: "1.8rem",
+    marginTop: "0.5rem",
+    textTransform: "none",
+    borderRadius: "2rem",
+  };
+
+  const aboutStyle = {
+    fontFamily: "pacifico",
+    fontWeight: "bold",
+    fontSize: "3em",
+    alignItems: "center",
+    marginLeft: "5rem",
+    marginTop: "-6.5rem",
+    color: "#fff",
+  };
+
   //contact-style//
   const contactStyle = {
+    fontFamily: "pacifico",
+    fontWeight: "bold",
+    fontSize: "3em",
     alignItems: "center",
-    marginLeft: "59rem",
-    marginTop: "17rem",
+    marginLeft: "60rem",
+    marginTop: "10rem",
+    color: "#fff",
+  };
+  //contactbns//
+  const contactbtnStyle = {
+    marginLeft: "49em",
+    color: "#fff",
+    borderColor: "#fff",
+    fontSize: "1.3rem",
+
+    fontWeight: "1.8rem",
+    marginTop: "0.5rem",
+    textTransform: "none",
+    borderRadius: "2rem",
   };
   const defaultOptions = {
     loop: true,
@@ -377,15 +418,26 @@ const LandingPage = () => {
             <Grid item container direction="row">
               <Grid item>
                 <Grid container direction="column" sx={{ marginTop: "15rem" }}>
-                  <Typography variant="h2">About Us</Typography>
-                  <Typography variant="body1">Let's get personal.</Typography>
+                  <Typography variant="h2" style={aboutStyle}>
+                    About Us
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      marginLeft: "5rem",
+                      color: "#fff",
+                      fontWeight: "1.5rem",
+                      fontSize: "1.5rem",
+                    }}
+                  >
+                    Let's get personal.
+                  </Typography>
                   <Grid item>
                     <Button
                       component={Link}
                       to="/about"
                       variant="outlined"
-                      style={{ color: "white", borderColor: "white" }}
-                      // className={classes.learnButton}
+                      style={aboutbtnStyle}
                     >
                       <span style={{ marginRight: 10 }}>Learn More</span>
                       <ArrowForwardIcon width={10} height={10} fill="white" />
@@ -395,16 +447,19 @@ const LandingPage = () => {
               </Grid>
 
               <Grid item>
-                <Grid
-                  container
-                  direction="column"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                >
+                <Grid container direction="column">
                   <Typography variant="h2" style={contactStyle}>
                     Contact Us
                   </Typography>
-                  <Typography variant="body1" sx={{ marginLeft: "55rem" }}>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      marginLeft: "66rem",
+                      color: "#fff",
+                      fontWeight: "1.5rem",
+                      fontSize: "1.5rem",
+                    }}
+                  >
                     Say hello!{" "}
                     <span role="img" aria-label="waving hand">
                       👋🏻
@@ -415,16 +470,20 @@ const LandingPage = () => {
                       component={Link}
                       to="/about"
                       variant="outlined"
-                      style={{ color: "white", borderColor: "white" }}
-                      // className={classes.learnButton}
+                      style={contactbtnStyle}
                     >
-                      <span sx={{ marginLeft: "55rem" }}>Learn More</span>
+                      <span>Learn More</span>
                       <ArrowForwardIcon width={10} height={10} fill="white" />
                     </Button>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
+          </Grid>
+        </Grid>
+        <Grid items>
+          <Grid>
+            <CallToAction />
           </Grid>
         </Grid>
       </Grid>
