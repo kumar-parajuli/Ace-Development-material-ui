@@ -82,7 +82,9 @@ const LandingPage = () => {
   };
   const spanStyle = {
     fontFamily: "pacifico",
-    Color: "#ff9800",
+    color: "#ff9800",
+    fontWeight: 500,
+    fontSize: "2rem",
   };
 
   //iso style
