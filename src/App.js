@@ -9,6 +9,7 @@ import Footer from "./Components/Ui/Footer";
 import LandingPage from "./Components/LandingPage";
 import theme from "./Components/Ui/Theme";
 import { ThemeProvider } from "@mui/material";
+import CustomSoftware from "./Components/CustomSoftware";
 function App() {
  
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route
             path="/customsoftware"
-            element={() => <div>Custom Software</div>}
+            element={<CustomSoftware/>}
           />
           <Route path="/mobileapps" element={() => <div>Mobile App</div>} />
           <Route exact path="/websites" element={() => <div>Websites</div>} />
