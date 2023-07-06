@@ -14,7 +14,7 @@ import {
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   const logoStyle = {
