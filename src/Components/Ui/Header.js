@@ -3,102 +3,166 @@ import {
   Tab,
   Tabs,
   Toolbar,
-  Typography,
   Button,
   MenuItem,
   Menu,
-  Paper,
-  useMediaQuery,
-  useTheme,
+  IconButton,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { makeStyles, useTheme } from "@mui/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 
-const Header = () => {
-  const logoStyle = {
-    height: "7rem",
-  };
+function ElevationScroll(props) {
+  const { children } = props;
 
-  const logobtnStyle = {
-    padding: "0",
-  };
-  const toolbarStyle = {
-    backgroundColor: "#1565c0",
-  };
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+  });
 
-  const tabsStyle = {
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+const useStyles = makeStyles((theme) => ({
+  toolbarMargin: {
+    ...theme.mixins.toolbar,
+    marginBottom: "3em",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "2em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "1.25em",
+    },
+  },
+  logo: {
+    height: "8em",
+
+    [theme.breakpoints.down("md")]: {
+      height: "5.5em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "7em",
+    },
+  },
+  logoContainer: {
+    padding: "0px",
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+  tabContainer: {
     marginLeft: "auto",
-    backgroundColor: "#1565c0",
-  };
-  const tabStyle = {
-    fontFamily: "Raleway",
-    textTransform: "none",
-    fontWeight: "600",
-    fontSize: "1.3rem",
-    color: "#fff",
-    minWidth: "10",
+  },
+
+  tab: {
+    ...theme.typography.tab,
+    minWidth: "10px",
     marginLeft: "25px",
-    // opacity: "0.7",
-    // "&:hover": {
-    //   opacity: "1",
-    // },
-  };
-  const buttonStyle = {
-    backgroundColor: "#ff9800",
-    color: "#ffflight",
+    textTransform: "none",
+  },
+  button: {
+    ...theme.typography.estimate,
+
     borderRadius: "50px",
     marginLeft: "50px",
     marginRight: "25px",
-    fontFamily: "pacifico",
-    fontSize: "1.3rem",
-    textTransform: "none",
-  };
-  const paperStyle = {
-    backgroundColor: "#1565c0",
-    color: "#fff",
-    borderRadius: "1px",
-    height: "10rem",
-  };
-  const MenuStyle = {
-    opacity: "0.7",
-    "&:hover": {
-      opacity: "1",
-    },
-  };
+    height: "45px",
 
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
+  },
+  menu: {
+    backgroundColor: theme.palette.common.blue,
+
+    color: "white",
+    borderRadius: "0px",
+  },
+  menuItem: {
+    ...theme.typography.tab,
+    opacity: 0.7,
+    "&:hover": {
+      opacity: 1,
+    },
+  },
+  appbar: {
+    zIndex: theme.zIndex.modal + 1,
+  },
+  drawerIcon: {
+    height: "50px",
+    width: "50px",
+  },
+  drawerIconContainer: {
+    marginLeft: "auto",
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+}));
+export default function Header(props) {
+  const classes = useStyles();
   const theme = useTheme();
+
+  const iOS =
+    typeof navigator !== "undefined" &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const handleChange = (e, value) => {
-    setValue(value);
+  const handleChange = (e, newvalue) => {
+    setValue(newvalue);
   };
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
-    setOpen(true);
+    setOpenMenu(true);
   };
 
   const handleMenuItemsClick = (e, i) => {
     setAnchorEl(null);
-    setOpen(false);
+    setOpenMenu(false);
     setSelectedIndex(i);
   };
 
   const handleClose = (e) => {
     setAnchorEl(null);
-    setOpen(false);
+    setOpenMenu(false);
   };
 
+  //for mapmenu//
   const menuOption = [
     { name: "services", Link: "/services" },
     { name: "Custom Software Development", Link: "/Customsoftware" },
     { name: "Mobile App Development", Link: "/mobileapps" },
     { name: "Website Development", Link: "/websites" },
+  ];
+
+  //map for drawer routes//
+  const routes = [
+    { name: "Home", link: "/", activeIndex: 0 },
+    {
+      name: "Services",
+      link: "/services",
+      activeIndex: 1,
+      ariaOwns: anchorEl ? "simple-menu" : undefined,
+      ariaPopup: anchorEl ? "true" : undefined,
+      mouseOver: (event) => handleClick(event),
+    },
+    { name: "The Revolution", link: "/revolution", activeIndex: 2 },
+    { name: "About Us", link: "/about", activeIndex: 3 },
+    { name: "Contact Us", link: "/contact", activeIndex: 4 },
   ];
 
   useEffect(() => {
@@ -174,127 +238,190 @@ const Header = () => {
     }
   }, [value]);
 
-  return (
-    <AppBar position="static">
-      <Toolbar disableGutters style={toolbarStyle}>
-        <Button
-          style={logobtnStyle}
+  const tabs = (
+    <React.Fragment>
+      <Tabs
+        className={classes.tabContainer}
+        value={value}
+        onChange={handleChange}
+        indicatorColor="primary"
+      >
+        {/* using map method for tabs route */}
+        {routes.map((route, index) => (
+          <Tab
+            key={route}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            aria-owns={route.ariaOwns}
+            aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+
+        {/* <Tab className={classes.tab} component={Link} to="/" label="Home" />
+        <Tab
+          arial-owns={anchorEl ? "simple-mennu" : undefined}
+          aria-haspopup={anchorEl ? "true" : undefined}
+          className={classes.tab}
           component={Link}
-          to="/"
-          onClick={() => setValue(0)}
-        >
-          <img style={logoStyle} alt="company logo" src={logo} />
-        </Button>
-        <Tabs
-          style={tabsStyle}
-          value={value}
-          onChange={handleChange}
-          indicatorColor="#1565c0"
-        >
-          <Tab style={tabStyle} component={Link} to="/" label="Home" />
-          <Tab
-            arial-owns={anchorEl ? "simple-mennu" : undefined}
-            aria-haspopup={anchorEl ? "true" : undefined}
-            style={tabStyle}
-            component={Link}
-            onMouseOver={(event) => handleClick(event)}
-            to="/services"
-            label="Services"
-          />
-          <Tab
-            style={tabStyle}
-            component={Link}
-            label="The Revolution"
-            to="/revolution"
-          />
-          <Tab style={tabStyle} component={Link} to="/about" label="About us" />
-          <Tab
-            style={tabStyle}
-            component={Link}
-            label="Contact us"
-            to="/contact"
-          />
-        </Tabs>
-        <Button
-          style={buttonStyle}
+          onMouseOver={(event) => handleClick(event)}
+          to="/services"
+          label="Services"
+        />
+
+
+        <Tab
+          className={classes.tab}
           component={Link}
-          variant="contained"
-          to="/estimate"
-        >
-          Free Estimate
-        </Button>
+          label="The Revolution"
+          to="/revolution"
+        />
+        <Tab
+          className={classes.tab}
+          component={Link}
+          to="/about"
+          label="About us"
+        />
+        <Tab
+          className={classes.tab}
+          component={Link}
+          to="/contact"
+          label="Contact us"
+        /> */}
+      </Tabs>
+      <Button
+        component={Link}
+        variant="contained"
+        to="/estimate"
+        color="secondary"
+        className={classes.button}
+      >
+        Free Estimate
+      </Button>
 
-        <Menu
-          // style={menuStyle}
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{ onMouseLeave: handleClose }}
-        >
-          {/* <MenuItem
-            onClick={() => {
-              handleClose();
-              setValue(1);
-            }}
-            component={Link}
-            to="services"
-          >
-            Services
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              handleClose();
-              setValue(1);
-            }}
-            component={Link}
-            to="/Custom Software Development"
-          >
-            Custom Software Development
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              handleClose();
-              setValue(1);
-            }}
-            component={Link}
-            to="/Mobile App Development"
-          >
-            Mobile App Development
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              handleClose();
-              setValue(1);
-            }}
-            component={Link}
-            to="/Website Development"
-          >
-            Website Development
-          </MenuItem> */}
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        open={openMenu}
+        onClose={handleClose}
+        classes={{ paper: classes.menu }}
+        MenuListProps={{ onMouseLeave: handleClose }}
+        elevation={0}
+        style={{ zIndex: 1300 }}
+        keepMounted
+      >
+        {/* <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setValue(1);
+                }}
+                component={Link}
+                to="services"
+                classes={{ root: classes.menuItems }}
+              >
+                Services
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setValue(1);
+                }}
+                component={Link}
+                to="/Custom Software Development"
+                classes={{ root: classes.menuItems }}
+              >
+                Custom Software Development
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setValue(1);
+                }}
+                component={Link}
+                to="/Mobile App Development"
+                classes={{ root: classes.menuItems }}
+              >
+                Mobile App Development
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setValue(1);
+                }}
+                component={Link}
+                to="/Website Development"
+                classes={{ root: classes.menuItems }}
+              >
+                Website Development
+              </MenuItem> */}
 
-          {/* ********* */}
-          {/* //using map filter// */}
+        {/* ********* */}
+        {/* //using map filter// */}
 
-          {menuOption.map((option, i) => (
-            <MenuItem
-              key={option}
-              component={Link}
-              to={option.Link}
-              onClick={(event) => {
-                handleMenuItemsClick(event, i);
-                setValue(1);
-                handleClose();
-              }}
-              selected={i === selectedIndex && value === 1}
-            >
-              {option.name}
-            </MenuItem>
-          ))}
-        </Menu>
-      </Toolbar>
-    </AppBar>
+        {menuOption.map((option, i) => (
+          <MenuItem
+            key={option}
+            component={Link}
+            to={option.Link}
+            classes={{ root: classes.menuItem }}
+            onClick={(event) => {
+              handleMenuItemsClick(event, i);
+              setValue(1);
+              handleClose();
+            }}
+            selected={i === selectedIndex && value === 1}
+          >
+            {option.name}
+          </MenuItem>
+        ))}
+      </Menu>
+    </React.Fragment>
   );
-};
 
-export default Header;
+  //drawer//
+  const drawer = (
+    <React.Fragment>
+      <SwipeableDrawer
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        onOpen={() => setOpenDrawer(true)}
+        classes={{ paper: classes.drawer }}
+      >
+        Example drawer
+      </SwipeableDrawer>
+      <IconButton
+        className={classes.drawerIconContainer}
+        onClick={() => setOpenDrawer(!openDrawer)}
+        disableRipple
+      >
+        <MenuIcon />
+      </IconButton>
+    </React.Fragment>
+  );
+
+  return (
+    <React.Fragment>
+      <ElevationScroll>
+        <AppBar position="fixed" className={classes.appbar}>
+          <Toolbar disableGutters>
+            <Button
+              component={Link}
+              to="/"
+              disableRipple
+              className={classes.logoContainer}
+              onClick={() => setValue(0)}
+            >
+              <img alt="company logo" className={classes.logo} src={logo} />
+            </Button>
+            {matches ? drawer : tabs}
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+      <div className={classes.toolbarMargin} />
+    </React.Fragment>
+  );
+}

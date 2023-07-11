@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   estimateButton: {
     ...theme.typography.estimate,
-    // backgroundColor: theme.palette.common.orange,
+    backgroundColor: theme.palette.common.orange,
     borderRadius: "50px",
     height: "45px",
     width: "145px",
@@ -139,7 +139,6 @@ export default function LandingPage(props) {
   return (
     <Grid container direction="column" className={classes.mainContainer}>
       <Grid item>
-        {" "}
         {/*-----Hero Block-----*/}
         <Grid container justify="flex-end" alignItems="center" direction="row">
           <Grid sm item className={classes.heroTextContainer}>
@@ -189,7 +188,6 @@ export default function LandingPage(props) {
         </Grid>
       </Grid>
       <Grid item>
-        {" "}
         {/*-----Custom Software Block-----*/}
         <Grid
           container

@@ -7,14 +7,14 @@ const arcGrey = "#868686";
 export default createTheme({
   palette: {
     common: {
-      blue: arcBlue,
-      orange: arcOrange,
+      blue: `${arcBlue}`,
+      orange: `${arcOrange}`,
     },
     primary: {
-      main: arcBlue,
+      main: `${arcBlue}`,
     },
     secondary: {
-      main: arcOrange,
+      main: `${arcOrange}`,
     },
   },
   typography: {
@@ -22,7 +22,7 @@ export default createTheme({
       fontFamily: "Raleway",
       textTransform: "none",
       fontWeight: 700,
-      color: "white",
+      color: "White",
       fontSize: "1rem",
     },
     estimate: {
@@ -41,18 +41,18 @@ export default createTheme({
     h3: {
       fontFamily: "Pacifico",
       fontSize: "2.5rem",
-      color:  arcBlue,
+      color: arcBlue,
     },
     h4: {
       fontFamily: "Raleway",
       fontSize: "1.75rem",
-      color:  arcBlue,
+      color: arcBlue,
       fontWeight: 700,
     },
     h6: {
       fontWeight: 500,
       fontFamily: "Raleway",
-      color:  arcBlue,
+      color: arcBlue,
     },
     subtitle1: {
       fontSize: "1.25rem",
