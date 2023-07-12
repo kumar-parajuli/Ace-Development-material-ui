@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.estimate,
     backgroundColor: theme.palette.common.orange,
     borderRadius: "50px",
+
     height: "45px",
     width: "145px",
     marginRight: "40px",
@@ -73,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
   specialText: {
     fontFamily: "Pacifico",
+
     color: theme.palette.common.orange,
   },
   subtitle: {
@@ -159,7 +161,9 @@ export default function LandingPage(props) {
                   to="/estimate"
                   variant="contained"
                   className={classes.estimateButton}
-                  // onClick={() => props.setValue(5)}
+                  sx={theme.typography.estimate}
+                  color="secondary"
+                  onClick={() => props.setValue(5)}
                 >
                   Free Estimate
                 </Button>

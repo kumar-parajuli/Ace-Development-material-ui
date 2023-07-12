@@ -7,22 +7,35 @@ const arcGrey = "#868686";
 export default createTheme({
   palette: {
     common: {
-      blue: `${arcBlue}`,
-      orange: `${arcOrange}`,
+      blue: arcBlue,
+      orange: arcOrange,
     },
     primary: {
-      main: `${arcBlue}`,
+      main: arcBlue,
     },
     secondary: {
-      main: `${arcOrange}`,
+      main: arcOrange,
     },
+    // background: {
+    //   blue: arcBlue,
+    //   orange: arcOrange,
+    // },
+   
   },
+
+  background:{
+    palette:{
+      blue: arcBlue,
+    orange: arcOrange,
+    }
+  },
+
   typography: {
     tab: {
       fontFamily: "Raleway",
       textTransform: "none",
-      fontWeight: 700,
-      color: "White",
+      fontWeight: 800,
+      color: "white",
       fontSize: "1rem",
     },
     estimate: {

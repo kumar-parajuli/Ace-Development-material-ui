@@ -10,8 +10,8 @@ import LandingPages from "./Components/LandingPages";
 import theme from "./Components/Ui/Theme";
 import { ThemeProvider } from "@mui/material/styles";
 import CustomSoftware from "./Components/CustomSoftware";
-import { MobileApp } from "./Components/MobileApp";
 import { Website } from "./Components/Website";
+import MobileApp from "./Components/MobileApp";
 function App() {
   return (
     <ThemeProvider theme={theme}>

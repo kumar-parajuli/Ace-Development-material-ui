@@ -7,6 +7,10 @@ import {
   MenuItem,
   Menu,
   IconButton,
+  ListItemText,
+  List,
+  ListItem,
+  Paper,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.svg";
@@ -43,16 +47,17 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     height: "8em",
+    marginLeft: "-0.5em",
 
     [theme.breakpoints.down("md")]: {
-      height: "5.5em",
+      height: "7em",
     },
     [theme.breakpoints.down("xs")]: {
-      height: "7em",
+      height: "5.5em",
     },
   },
   logoContainer: {
-    padding: "0px",
+    padding: 0,
     "&:hover": {
       backgroundColor: "transparent",
     },
@@ -60,30 +65,27 @@ const useStyles = makeStyles((theme) => ({
   tabContainer: {
     marginLeft: "auto",
   },
-
   tab: {
-    ...theme.typography.tab,
+    // ...theme.typography.tab,
     minWidth: "10px",
-    marginLeft: "25px",
-    textTransform: "none",
+    marginRight: "25px",
   },
   button: {
-    ...theme.typography.estimate,
-
+    // ...theme.typography.estimate,
     borderRadius: "50px",
     marginLeft: "50px",
     marginRight: "25px",
-    height: "45px",
-
+    height: "3em",
+    width: "9em",
     "&:hover": {
       backgroundColor: theme.palette.secondary.light,
     },
   },
   menu: {
     backgroundColor: theme.palette.common.blue,
-
     color: "white",
     borderRadius: "0px",
+    marginTop: "20px",
   },
   menuItem: {
     ...theme.typography.tab,
@@ -91,9 +93,6 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       opacity: 1,
     },
-  },
-  appbar: {
-    zIndex: theme.zIndex.modal + 1,
   },
   drawerIcon: {
     height: "50px",
@@ -105,7 +104,31 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "transparent",
     },
   },
+  drawer: {
+    backgroundColor: theme.palette.common.blue,
+  },
+  drawerItem: {
+    fontFamily: "Raleway",
+    textTransform: "none",
+    fontWeight: 800,
+    color: "white",
+    fontSize: "1rem",
+    color: "white",
+    opacity: 0.7,
+  },
+  drawerItemEstimate: {
+    backgroundColor: theme.palette.common.orange,
+  },
+  drawerItemSelected: {
+    "& .MuiListItemText-root": {
+      opacity: 1,
+    },
+  },
+  appbar: {
+    zIndex: theme.zIndex.modal + 1,
+  },
 }));
+
 export default function Header(props) {
   const classes = useStyles();
   const theme = useTheme();
@@ -257,6 +280,7 @@ export default function Header(props) {
             aria-owns={route.ariaOwns}
             aria-haspopup={route.ariaPopup}
             onMouseOver={route.mouseOver}
+            sx={{ ...theme.typography.tab }}
           />
         ))}
 
@@ -297,10 +321,10 @@ export default function Header(props) {
         to="/estimate"
         color="secondary"
         className={classes.button}
+        sx={{ ...theme.typography.estimate }}
       >
         Free Estimate
       </Button>
-
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -372,6 +396,7 @@ export default function Header(props) {
               handleClose();
             }}
             selected={i === selectedIndex && value === 1}
+            sx={{ ...theme.typography.tab }}
           >
             {option.name}
           </MenuItem>
@@ -391,7 +416,48 @@ export default function Header(props) {
         onOpen={() => setOpenDrawer(true)}
         classes={{ paper: classes.drawer }}
       >
-        Example drawer
+        <div className={classes.toolbarMargin} />
+        <List disablePadding>
+          {routes.map((route) => (
+            <ListItem
+              divider
+              key={`${route}${route.activeIndex}`}
+              button
+              component={Link}
+              to={route.link}
+              selected={props.value === route.activeIndex}
+              classes={{ selected: classes.drawerItemSelected }}
+              onClick={() => {
+                setOpenDrawer(false);
+                props.setValue(route.activeIndex);
+              }}
+            >
+              <ListItemText className={classes.drawerItem} disableTypography>
+                {route.name}
+              </ListItemText>
+            </ListItem>
+          ))}
+          <ListItem
+            onClick={() => {
+              setOpenDrawer(false);
+              props.setValue(5);
+            }}
+            divider
+            button
+            component={Link}
+            classes={{
+              root: classes.drawerItemEstimate,
+              selected: classes.drawerItemSelected,
+            }}
+            to="/estimate"
+            selected={props.value === 5}
+            sx={{ backgroundColor: theme.palette.common.orange }}
+          >
+            <ListItemText className={classes.drawerItem} disableTypography>
+              Free Estimate
+            </ListItemText>
+          </ListItem>
+        </List>
       </SwipeableDrawer>
       <IconButton
         className={classes.drawerIconContainer}
