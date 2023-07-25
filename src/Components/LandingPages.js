@@ -39,13 +39,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   buttonContainer: {
-    marginTop: "1.5em",
+    marginTop: "1em",
   },
   learnButtonHero: {
     ...theme.typography.learnButton,
     fontSize: "0.9rem",
     height: "45px",
-    width: "150px",
+    width: "145px",
   },
   learnButton: {
     ...theme.typography.learnButton,
@@ -139,11 +139,35 @@ export default function LandingPage(props) {
   };
 
   return (
-    <Grid container direction="column" className={classes.mainContainer}>
+    <Grid
+      container
+      direction="column"
+      sx={{
+        marginTop: "5em",
+        [theme.breakpoints.down("md")]: {
+          marginTop: "3em",
+        },
+        [theme.breakpoints.down("xs")]: {
+          marginTop: "2em",
+        },
+      }}
+      // className={classes.mainContainer}
+    >
       <Grid item>
         {/*-----Hero Block-----*/}
         <Grid container justify="flex-end" alignItems="center" direction="row">
-          <Grid sm item className={classes.heroTextContainer}>
+          <Grid
+            sm
+            item
+            // className={classes.heroTextContainer}
+            sx={{
+              minWidth: "21.5em",
+              marginLeft: "1em",
+              [theme.breakpoints.down("xs")]: {
+                marginLeft: 0,
+              },
+            }}
+          >
             <Typography variant="h2" align="center">
               Bringing West Coast Technology
               <br />
@@ -153,15 +177,27 @@ export default function LandingPage(props) {
               container
               spacing="2em"
               justifyContent="center"
-              className={classes.buttonContainer}
+              // className={classes.buttonContainer}
+              sx={{ marginTop: "1em" }}
             >
               <Grid item>
                 <Button
                   component={Link}
                   to="/estimate"
                   variant="contained"
-                  className={classes.estimateButton}
-                  sx={theme.typography.estimate}
+                  // className={classes.estimateButton}
+                  sx={{
+                    ...theme.typography.estimate,
+                    backgroundColor: theme.palette.common.orange,
+                    borderRadius: "50px",
+
+                    height: "45px",
+                    width: "145px",
+                    marginRight: "40px",
+                    "&:hover": {
+                      backgroundColor: theme.palette.secondary.light,
+                    },
+                  }}
                   color="secondary"
                   onClick={() => props.setValue(5)}
                 >
@@ -172,7 +208,13 @@ export default function LandingPage(props) {
                 <Button
                   component={Link}
                   to="/revolution"
-                  className={classes.learnButtonHero}
+                  sx={{
+                    ...theme.typography.learnButton,
+                    fontSize: "0.9rem",
+                    height: "45px",
+                    width: "145px",
+                  }}
+                  // className={classes.learnButtonHero}
                   variant="outlined"
                   onClick={() => props.setValue(2)}
                 >
@@ -186,7 +228,20 @@ export default function LandingPage(props) {
               </Grid>
             </Grid>
           </Grid>
-          <Grid sm item className={classes.animation}>
+          <Grid
+            sm
+            item
+            // className={classes.animation}
+            sx={{
+              maxWidth: "50em",
+              minWidth: "21em",
+              marginTop: "2em",
+              marginLeft: "10%",
+              [theme.breakpoints.down("sm")]: {
+                maxWidth: "30em",
+              },
+            }}
+          >
             <Lottie options={defaultOptions} height={"100%"} width={"100%"} />
           </Grid>
         </Grid>
@@ -197,7 +252,13 @@ export default function LandingPage(props) {
           container
           direction="row"
           justifyContent={matchesSM ? "center" : undefined}
-          className={classes.serviceContainer}
+          // className={classes.serviceContainer}
+          sx={{
+            marginTop: "12em",
+            [theme.breakpoints.down("sm")]: {
+              padding: 25,
+            },
+          }}
         >
           <Grid
             item
@@ -207,18 +268,40 @@ export default function LandingPage(props) {
             }}
           >
             <Typography variant="h4">Custom Software Development</Typography>
-            <Typography variant="subtitle1" className={classes.subtitle}>
+            <Typography
+              variant="subtitle1"
+              // className={classes.subtitle}
+              sx={{ marginBottom: "1em" }}
+            >
               Save Energy. Save Time. Save Money.
             </Typography>
             <Typography variant="subtitle1">
               Complete digital solutions, from investigation to{" "}
-              <span className={classes.specialText}>celebration.</span>
+              <span
+                //  className={classes.specialText}
+                sx={{
+                  fontFamily: "Pacifico",
+
+                  color: theme.palette.common.orange,
+                }}
+              >
+                celebration.
+              </span>
             </Typography>
             <Button
               component={Link}
               to="/customsoftware"
               variant="outlined"
-              className={classes.learnButton}
+              // className={classes.learnButton}
+              sx={{
+                ...theme.typography.learnButton,
+                fontSize: "0.7rem",
+                height: "35px",
+                padding: "5px",
+                [theme.breakpoints.down("sm")]: {
+                  marginBottom: "2em",
+                },
+              }}
               onClick={() => {
                 props.setValue(1);
                 props.setSelectedIndex(1);
@@ -234,7 +317,13 @@ export default function LandingPage(props) {
           </Grid>
           <Grid item>
             <img
-              className={classes.icon}
+              // className={classes.icon}
+              sx={{
+                marginLeft: "2em",
+                [theme.breakpoints.down("xs")]: {
+                  marginLeft: 0,
+                },
+              }}
               alt="custom software icon"
               src={customSoftwareIcon}
             />
@@ -242,13 +331,18 @@ export default function LandingPage(props) {
         </Grid>
       </Grid>
       <Grid item>
-        {" "}
         {/*-----iOS/Android Block-----*/}
         <Grid
           container
           direction="row"
           justifyContent={matchesSM ? "center" : "flex-end"}
-          className={classes.serviceContainer}
+          // className={classes.serviceContainer}
+          sx={{
+            marginTop: "12em",
+            [theme.breakpoints.down("sm")]: {
+              padding: 25,
+            },
+          }}
         >
           <Grid
             item
@@ -257,7 +351,11 @@ export default function LandingPage(props) {
             }}
           >
             <Typography variant="h4">iOS/Android App Development</Typography>
-            <Typography variant="subtitle1" className={classes.subtitle}>
+            <Typography
+              variant="subtitle1"
+              // className={classes.subtitle}
+              sx={{ marginBottom: "1em" }}
+            >
               Extend Functionality. Extend Access. Increase Engagement.
             </Typography>
             <Typography variant="subtitle1">
@@ -268,7 +366,16 @@ export default function LandingPage(props) {
               component={Link}
               to="/mobileapps"
               variant="outlined"
-              className={classes.learnButton}
+              // className={classes.learnButton}
+              sx={{
+                ...theme.typography.learnButton,
+                fontSize: "0.7rem",
+                height: "35px",
+                padding: "5px",
+                [theme.breakpoints.down("sm")]: {
+                  marginBottom: "2em",
+                },
+              }}
               onClick={() => {
                 props.setValue(1);
                 props.setSelectedIndex(2);
@@ -284,7 +391,13 @@ export default function LandingPage(props) {
           </Grid>
           <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
             <img
-              className={classes.icon}
+              // className={classes.icon}
+              sx={{
+                marginLeft: "2em",
+                [theme.breakpoints.down("xs")]: {
+                  marginLeft: 0,
+                },
+              }}
               alt="mobile phone icon"
               src={mobileAppsIcon}
             />
@@ -298,7 +411,13 @@ export default function LandingPage(props) {
           container
           direction="row"
           justifyContent={matchesSM ? "center" : undefined}
-          className={classes.serviceContainer}
+          // className={classes.serviceContainer}
+          sx={{
+            marginTop: "12em",
+            [theme.breakpoints.down("sm")]: {
+              padding: 25,
+            },
+          }}
         >
           <Grid
             item
@@ -308,7 +427,11 @@ export default function LandingPage(props) {
             }}
           >
             <Typography variant="h4">Website Development</Typography>
-            <Typography variant="subtitle1" className={classes.subtitle}>
+            <Typography
+              variant="subtitle1"
+              // className={classes.subtitle}
+              sx={{ marginBottom: "1em" }}
+            >
               Reach More. Discover More. Sell More.
             </Typography>
             <Typography variant="subtitle1">
@@ -318,7 +441,16 @@ export default function LandingPage(props) {
               component={Link}
               to="/websites"
               variant="outlined"
-              className={classes.learnButton}
+              // className={classes.learnButton}
+              sx={{
+                ...theme.typography.learnButton,
+                fontSize: "0.7rem",
+                height: "35px",
+                padding: "5px",
+                [theme.breakpoints.down("sm")]: {
+                  marginBottom: "2em",
+                },
+              }}
               onClick={() => {
                 props.setValue(1);
                 props.setSelectedIndex(3);
@@ -334,7 +466,13 @@ export default function LandingPage(props) {
           </Grid>
           <Grid item>
             <img
-              className={classes.icon}
+              // className={classes.icon}
+              sx={{
+                marginLeft: "2em",
+                [theme.breakpoints.down("xs")]: {
+                  marginLeft: 0,
+                },
+              }}
               alt="website icon"
               src={websitesIcon}
             />
@@ -349,7 +487,23 @@ export default function LandingPage(props) {
           alignItems="center"
           justifyContent="center"
         >
-          <Card className={classes.revolutionCard}>
+          <Card
+            //  className={classes.revolutionCard}
+            sx={{
+              position: "absolute",
+              boxShadow: theme.shadows[10],
+              borderRadius: 15,
+              padding: "10em",
+              [theme.breakpoints.down("sm")]: {
+                paddingTop: "8em",
+                paddingBottom: "8em",
+                paddingLeft: 0,
+                paddingRight: 0,
+                borderRadius: 0,
+                width: "100%",
+              },
+            }}
+          >
             <CardContent>
               <Grid
                 container
@@ -369,7 +523,14 @@ export default function LandingPage(props) {
                   <Button
                     component={Link}
                     to="/revolution"
-                    className={classes.learnButtonHero}
+                    // className={classes.learnButtonHero}
+
+                    sx={{
+                      ...theme.typography.learnButton,
+                      fontSize: "0.9rem",
+                      height: "45px",
+                      width: "145px",
+                    }}
                     variant="outlined"
                     onClick={() => props.setValue(2)}
                   >
@@ -384,7 +545,17 @@ export default function LandingPage(props) {
               </Grid>
             </CardContent>
           </Card>
-          <div className={classes.revolutionBackground} />
+          <div
+            sx={{
+              backgroundImage: `url(${revolutionBackground})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              height: "100%",
+              width: "100%",
+            }}
+            // className={classes.revolutionBackground}
+          />
         </Grid>
       </Grid>
       <Grid item>
@@ -394,7 +565,15 @@ export default function LandingPage(props) {
           style={{ height: "80em" }}
           alignItems="center"
           direction="row"
-          className={classes.infoBackground}
+          // className={classes.infoBackground}
+          sx={{
+            backgroundImage: `url(${infoBackground})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            height: "100%",
+            width: "100%",
+          }}
         >
           <Grid
             item
@@ -424,7 +603,16 @@ export default function LandingPage(props) {
                     to="/about"
                     variant="outlined"
                     style={{ color: "white", borderColor: "white" }}
-                    className={classes.learnButton}
+                    // className={classes.learnButton}
+                    sx={{
+                      ...theme.typography.learnButton,
+                      fontSize: "0.7rem",
+                      height: "35px",
+                      padding: "5px",
+                      [theme.breakpoints.down("sm")]: {
+                        marginBottom: "2em",
+                      },
+                    }}
                     onClick={() => props.setValue(3)}
                   >
                     <span style={{ marginRight: 10 }}>Learn More</span>
@@ -457,7 +645,16 @@ export default function LandingPage(props) {
                     to="/contact"
                     variant="outlined"
                     style={{ color: "white", borderColor: "white" }}
-                    className={classes.learnButton}
+                    // className={classes.learnButton}
+                    sx={{
+                      ...theme.typography.learnButton,
+                      fontSize: "0.7rem",
+                      height: "35px",
+                      padding: "5px",
+                      [theme.breakpoints.down("sm")]: {
+                        marginBottom: "2em",
+                      },
+                    }}
                     onClick={() => props.setValue(4)}
                   >
                     <span style={{ marginRight: 10 }}>Learn More</span>

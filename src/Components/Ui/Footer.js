@@ -1,157 +1,341 @@
-import { Button, Grid, Link } from "@mui/material";
+import { Button, Grid, Hidden, Link } from "@mui/material";
 import React from "react";
 import footerAdornment from "../../assets/Footer Adornment.svg";
 import facebook from "../../assets/facebook.svg";
 import twitter from "../../assets/twitter.svg";
 import instagram from "../../assets/instagram.svg";
+import { makeStyles, useTheme } from "@mui/styles";
 
-const Footer = () => {
-  const footerStyle = {
-    backgroundColor: "#1565c0",
-    // height: "15rem",
+const useStyles = makeStyles((theme) => ({
+  footer: {
+    backgroundColor: theme.palette.common.blue,
     width: "100%",
+    zIndex: 1302,
     position: "relative",
-  };
-  const imgStyle = {
-    width: "22em",
-    verticalAlignment: "bottom",
-  };
-  const mainGrid = {
+  },
+  adornment: {
+    width: "25em",
+    verticalAlign: "bottom",
+    [theme.breakpoints.down("md")]: {
+      width: "21em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "15em",
+    },
+  },
+  mainContainer: {
     position: "absolute",
-    color: "#fff",
-    marginLeft: "15rem",
-    marginTop: "1rem",
-  };
-  const gridItemStyle = {
-    margin: "3em",
-    marginLeft: "8rem",
-  };
-  const itemLk = {
-    color: "#fff",
+  },
+  link: {
+    color: "white",
     fontFamily: "Arial",
-    fontSize: "0.90rem",
+    fontSize: "0.75rem",
     fontWeight: "bold",
-  };
-  const itemStyle = {
-    color: "#fff",
-    fontFamily: "Arial",
-    fontSize: "0.90rem",
-    fontWeight: "bold",
-    marginTop: "3rem",
-    marginleft: "2rem",
-  };
-  const buttonStyle = {
-    position: "absolute",
-    marginTop: "9rem",
-    marginLeft: "77rem",
-    spacing: "8",
-  };
-  const gridStyle = {
+    textDecoration: "none",
+  },
+
+  gridItem: {
+    margin: "5em",
+  },
+  icon: {
+    height: "4em",
+    width: "4em",
+    [theme.breakpoints.down("xs")]: {
+      height: "2.5em",
+      width: "2.5em",
+    },
+  },
+  socialContainer: {
     position: "absolute",
     marginTop: "-6em",
     right: "1.5em",
-  };
-  const iconStyle = {
-    height: "4em",
-    width: "3em",
-    // marginLeft: "78rem",
-  };
-  const gridItem = {
-    margin: "3em",
-  };
+    [theme.breakpoints.down("xs")]: {
+      right: "0.6em",
+    },
+  },
+}));
 
+export default function Footer(props) {
+  const classes = useStyles();
+  const theme = useTheme();
   return (
-    <footer style={footerStyle}>
-      <Grid container display="flex" justifycontent="center" style={mainGrid}>
-        <Grid item style={itemStyle} component={Link} to="/">
-          Home
+    <footer
+      sx={{
+        backgroundColor: theme.palette.common.blue,
+        width: "100%",
+        zIndex: 1302,
+        position: "relative",
+      }}
+      className={classes.footer}
+    >
+      <Hidden mdDown>
+        <Grid
+          container
+          justifyContent="center"
+          className={classes.mainContainer}
+        >
+          <Grid item sx={{ margin: "4em" }} className={classes.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                component={Link}
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                onClick={() => props.setValue(0)}
+                to="/"
+              >
+                Home
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item sx={{ margin: "4em" }} className={classes.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                // component={Link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                onClick={() => {
+                  props.setValue(1);
+                  props.setSelectedIndex(0);
+                }}
+                to="/services"
+                // className={classes.link}
+              >
+                Services
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                to="/customsoftware"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                onClick={() => {
+                  props.setValue(1);
+                  props.setSelectedIndex(1);
+                }}
+              >
+                Custom Software Development
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                to="/mobileapps"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                onClick={() => {
+                  props.setValue(1);
+                  props.setSelectedIndex(2);
+                }}
+              >
+                iOS/Android App Development
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                onClick={() => {
+                  props.setValue(1);
+                  props.setSelectedIndex(3);
+                }}
+                to="/websites"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+              >
+                Website Development
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item sx={{ margin: "4em" }} className={classes.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                component={Link}
+                to="/revolution"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                onClick={() => props.setValue(2)}
+              >
+                The Revolution
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                to="/revolution"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                onClick={() => props.setValue(2)}
+              >
+                Vision
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                to="/revolution"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                onClick={() => props.setValue(2)}
+              >
+                Technology
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                to="/revolution"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                onClick={() => props.setValue(2)}
+              >
+                Process
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item sx={{ margin: "4em" }} className={classes.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                component={Link}
+                onClick={() => props.setValue(3)}
+                to="/about"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+              >
+                About Us
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                onClick={() => props.setValue(3)}
+                to="/about"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+              >
+                History
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                onClick={() => props.setValue(3)}
+                to="/about"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+              >
+                Team
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item sx={{ margin: "4em" }} className={classes.gridItem}>
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                item
+                component={Link}
+                onClick={() => props.setValue(4)}
+                to="/contact"
+                // className={classes.link}
+                sx={{
+                  color: "white",
+                  fontFamily: "Arial",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+              >
+                Contact Us
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
+      </Hidden>
 
-        <Grid item style={gridItemStyle}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item style={itemLk} component={Link} to="/services">
-              Services
-            </Grid>
-            <Grid item style={itemLk}>
-              Custom Software Development
-            </Grid>
-            <Grid item style={itemLk}>
-              Mobile App Development
-            </Grid>
-            <Grid item style={itemLk}>
-              Website Development
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item style={gridItemStyle}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item style={itemLk}>
-              The Revolution
-            </Grid>
-            <Grid item style={itemLk}>
-              Vision
-            </Grid>
-            <Grid item style={itemLk}>
-              Technology
-            </Grid>
-            <Grid item style={itemLk}>
-              Process
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item style={gridItemStyle}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item style={itemLk} component={Link} to="/about">
-              About Us
-            </Grid>
-            <Grid item style={itemLk}>
-              History
-            </Grid>
-            <Grid item style={itemLk}>
-              Team
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item style={gridItemStyle}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item>Contact Us</Grid>
-          </Grid>
-        </Grid>
-      </Grid>
       <img
-        style={imgStyle}
-        alt="black docorative slash"
+        alt="black decorative slash"
         src={footerAdornment}
+        className={classes.adornment}
       />
-      {/* <Button justify="flex-end" spacing={2} style={buttonStyle}>
-        <img
-          src={facebook}
-          rel="noopener noreferrer"
-          target="_blank"
-          component={Link}
-          to="/"
-        />
-        <img
-          src={twitter}
-          rel="noopener noreferrer"
-          target="_blank"
-          component={Link}
-          to="/"
-        />
-        <img
-          src={instagram}
-          rel="noopener noreferrer"
-          target="_blank"
-          component={Link}
-          to="https://www.facebook.com/"
-        />
-      </Button> */}
+
       <Grid
         container
-        direction="row"
         justifyContent="flex-end"
         spacing={2}
-        style={gridStyle}
+        // className={classes.socialContainer}
+        sx={{
+          position: "absolute",
+          marginTop: "-6em",
+          right: "1.5em",
+          [theme.breakpoints.down("xs")]: {
+            right: "0.6em",
+          },
+        }}
       >
         <Grid
           item
@@ -159,9 +343,8 @@ const Footer = () => {
           href="https://www.facebook.com"
           rel="noopener noreferrer"
           target="_blank"
-          spacing={2}
         >
-          <img alt="facebook logo" src={facebook} style={iconStyle} />
+          <img alt="facebook logo" src={facebook} className={classes.icon} />
         </Grid>
         <Grid
           item
@@ -170,7 +353,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <img alt="twitter logo" src={twitter} style={iconStyle} />
+          <img alt="twitter logo" src={twitter} className={classes.icon} />
         </Grid>
         <Grid
           item
@@ -179,11 +362,9 @@ const Footer = () => {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <img alt="instagram logo" src={instagram} style={iconStyle} />
+          <img alt="instagram logo" src={instagram} className={classes.icon} />
         </Grid>
       </Grid>
     </footer>
   );
-};
-
-export default Footer;
+}

@@ -40,7 +40,7 @@ const Services = () => {
   const typographyStyle3 = {
     marginTop: "6rem",
     color: "#1565c0",
-    fontFamily: "pacifico",
+    fontFamily:  "Raleway",
     fontWeight: 800,
     fontSize: "2.7rem",
     marginLeft: "4rem",

@@ -20,21 +20,20 @@ export default createTheme({
     //   blue: arcBlue,
     //   orange: arcOrange,
     // },
-   
   },
 
-  background:{
-    palette:{
+  background: {
+    palette: {
       blue: arcBlue,
-    orange: arcOrange,
-    }
+      orange: arcOrange,
+    },
   },
 
   typography: {
     tab: {
       fontFamily: "Raleway",
       textTransform: "none",
-      fontWeight: 800,
+      fontWeight: 700,
       color: "white",
       fontSize: "1rem",
     },

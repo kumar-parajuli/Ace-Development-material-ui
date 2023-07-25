@@ -12,11 +12,20 @@ import { ThemeProvider } from "@mui/material/styles";
 import CustomSoftware from "./Components/CustomSoftware";
 import { Website } from "./Components/Website";
 import MobileApp from "./Components/MobileApp";
+import { useState } from "react";
 function App() {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [value, setValue] = useState(0);
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Header />
+        <Header
+          value={value}
+          setValue={setValue}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        />
         <Routes>
           <Route path="/" element={<LandingPages />} />
           <Route path="/services" element={<Services />} />
@@ -28,7 +37,12 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/estimate" element={<Estimate />} />
         </Routes>
-        <Footer />
+        <Footer
+          value={value}
+          setValue={setValue}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        />
       </BrowserRouter>
     </ThemeProvider>
   );

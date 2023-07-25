@@ -20,6 +20,7 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { makeStyles, useTheme } from "@mui/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import { paperClasses } from "@mui/material/Paper";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -57,68 +58,63 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logoContainer: {
-    padding: 0,
+    // padding: 0,
     "&:hover": {
       backgroundColor: "transparent",
     },
   },
-  tabContainer: {
-    marginLeft: "auto",
-  },
-  tab: {
-    // ...theme.typography.tab,
-    minWidth: "10px",
-    marginRight: "25px",
-  },
+  // tabContainer: {
+  //   marginLeft: "auto",
+  // },
+  // navTab: {
+  //    ...theme.typography.tab,
+  //   minWidth: "10px",
+  //   marginRight: "25px",
+  // },
   button: {
     // ...theme.typography.estimate,
-    borderRadius: "50px",
-    marginLeft: "50px",
-    marginRight: "25px",
-    height: "3em",
-    width: "9em",
+    // marginLeft: "50px",
+    // marginRight: "25px",
+    // height: "3em",
+    // width: "9em",
+    // borderRadius: "50px",
     "&:hover": {
       backgroundColor: theme.palette.secondary.light,
     },
   },
   menu: {
-    backgroundColor: theme.palette.common.blue,
+    // backgroundColor:theme.palette.common.blue,
     color: "white",
     borderRadius: "0px",
-    marginTop: "20px",
   },
   menuItem: {
-    ...theme.typography.tab,
+    // ...theme.typography.tab,
     opacity: 0.7,
     "&:hover": {
       opacity: 1,
     },
   },
-  drawerIcon: {
-    height: "50px",
-    width: "50px",
-  },
+  // drawerIcon: {
+  //   height:"50px",
+  //   width:"50px",
+  // },
+
   drawerIconContainer: {
-    marginLeft: "auto",
+    // marginLeft: "auto",
     "&:hover": {
       backgroundColor: "transparent",
     },
   },
-  drawer: {
-    backgroundColor: theme.palette.common.blue,
-  },
+  // drawer: {
+  //   backgroundColor: theme.palette.common.blue,
+  // },
   drawerItem: {
-    fontFamily: "Raleway",
-    textTransform: "none",
-    fontWeight: 800,
-    color: "white",
-    fontSize: "1rem",
-    color: "white",
+    ...theme.typography.tab,
     opacity: 0.7,
   },
-  drawerItemEstimate: {
-    backgroundColor: theme.palette.common.orange,
-  },
+  // drawerItemEstimate: {
+  //   backgroundColor: theme.palette.common.orange,
+  // },
   drawerItemSelected: {
     "& .MuiListItemText-root": {
       opacity: 1,
@@ -138,14 +134,14 @@ export default function Header(props) {
     /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [value, setValue] = useState(0);
+  // const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  // const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleChange = (e, newvalue) => {
-    setValue(newvalue);
+    props.setValue(newvalue);
   };
 
   const handleClick = (e) => {
@@ -156,7 +152,7 @@ export default function Header(props) {
   const handleMenuItemsClick = (e, i) => {
     setAnchorEl(null);
     setOpenMenu(false);
-    setSelectedIndex(i);
+    props.setSelectedIndex(i);
   };
 
   const handleClose = (e) => {
@@ -165,11 +161,26 @@ export default function Header(props) {
   };
 
   //for mapmenu//
-  const menuOption = [
-    { name: "services", Link: "/services" },
-    { name: "Custom Software Development", Link: "/Customsoftware" },
-    { name: "Mobile App Development", Link: "/mobileapps" },
-    { name: "Website Development", Link: "/websites" },
+  const menuOptions = [
+    { name: "services", Link: "/services", activeIndex: 1, selectedIndex: 0 },
+    {
+      name: "Custom Software Development",
+      Link: "/Customsoftware",
+      activeIndex: 1,
+      selectedIndex: 1,
+    },
+    {
+      name: "Mobile App Development",
+      Link: "/mobileapps",
+      activeIndex: 1,
+      selectedIndex: 2,
+    },
+    {
+      name: "Website Development",
+      Link: "/websites",
+      activeIndex: 1,
+      selectedIndex: 3,
+    },
   ];
 
   //map for drawer routes//
@@ -189,98 +200,127 @@ export default function Header(props) {
   ];
 
   useEffect(() => {
-    if (window.location.pathname === "/" && value !== 0) {
-      setValue(0);
-    } else if (window.location.pathname === "/services" && value !== 1) {
-      setValue(1);
-    } else if (window.location.pathname === "/revolution" && value !== 2) {
-      setValue(2);
-    } else if (window.location.pathname === "/about" && value !== 3) {
-      setValue(3);
-    } else if (window.location.pathname === "/contact" && value !== 4) {
-      setValue(4);
-    } else if (window.location.pathname === "/estimate" && value !== 5) {
-      setValue(5);
-    }
-    switch (window.location.pathname) {
-      case "/":
-        if (value !== 0) {
-          setValue(0);
-        }
-        break;
-      case "/services":
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(0);
-        }
-        break;
-      case "/customsoftware":
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(1);
-        }
-        break;
-      case "/mobileapps":
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(2);
-        }
-        break;
-      case "/websites":
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(3);
-        }
-        break;
-      case "/revolution":
-        if (value !== 2) {
-          setValue(2);
-        }
-        break;
+    //clean up code using map method//
 
-      case "/about":
-        if (value !== 3) {
-          setValue(3);
-        }
-        break;
+    [...menuOptions, ...routes].forEach((route) => {
+      switch (window.location.pathname) {
+        case `${route.link}`:
+          if (props.value !== route.activeIndex) {
+            props.setValue(route.activeIndex);
+            if (
+              route.selectedIndex &&
+              route.selectedIndex !== props.selectedIndex
+            ) {
+              props.setSelectedIndex(route.selectedIndex);
+            }
+          }
+          break;
+        case "/estimate":
+          props.setValue(5);
+          break;
+        default:
+          break;
+      }
+    });
+  }, [props.value, menuOptions, props.selectedIndex, routes, props]);
 
-      case "/contact":
-        if (value !== 4) {
-          setValue(4);
-        }
-        break;
+  //   if (window.location.pathname === "/" && value !== 0) {
+  //     setValue(0);
+  //   } else if (window.location.pathname === "/services" && value !== 1) {
+  //     setValue(1);
+  //   } else if (window.location.pathname === "/revolution" && value !== 2) {
+  //     setValue(2);
+  //   } else if (window.location.pathname === "/about" && value !== 3) {
+  //     setValue(3);
+  //   } else if (window.location.pathname === "/contact" && value !== 4) {
+  //     setValue(4);
+  //   } else if (window.location.pathname === "/estimate" && value !== 5) {
+  //     setValue(5);
+  //   }
+  //   switch (window.location.pathname) {
+  //     case "/":
+  //       if (value !== 0) {
+  //         setValue(0);
+  //       }
+  //       break;
+  //     case "/services":
+  //       if (value !== 1) {
+  //         setValue(1);
+  //         setSelectedIndex(0);
+  //       }
+  //       break;
+  //     case "/customsoftware":
+  //       if (value !== 1) {
+  //         setValue(1);
+  //         setSelectedIndex(1);
+  //       }
+  //       break;
+  //     case "/mobileapps":
+  //       if (value !== 1) {
+  //         setValue(1);
+  //         setSelectedIndex(2);
+  //       }
+  //       break;
+  //     case "/websites":
+  //       if (value !== 1) {
+  //         setValue(1);
+  //         setSelectedIndex(3);
+  //       }
+  //       break;
+  //     case "/revolution":
+  //       if (value !== 2) {
+  //         setValue(2);
+  //       }
+  //       break;
 
-      case "/estimate":
-        if (value !== 5) {
-          setValue(5);
-        }
-        break;
+  //     case "/about":
+  //       if (value !== 3) {
+  //         setValue(3);
+  //       }
+  //       break;
 
-      default:
-        break;
-    }
-  }, [value]);
+  //     case "/contact":
+  //       if (value !== 4) {
+  //         setValue(4);
+  //       }
+  //       break;
+
+  //     case "/estimate":
+  //       if (value !== 5) {
+  //         setValue(5);
+  //       }
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  // }, [value]);
 
   const tabs = (
     <React.Fragment>
       <Tabs
-        className={classes.tabContainer}
-        value={value}
+        // className={classes.tabContainer}
+        sx={{ marginLeft: "auto" }}
+        value={props.value}
         onChange={handleChange}
         indicatorColor="primary"
       >
         {/* using map method for tabs route */}
         {routes.map((route, index) => (
           <Tab
-            key={route}
-            className={classes.tab}
+            key={`$(route)${index}`}
+            className={classes.navTab}
             component={Link}
             to={route.link}
             label={route.name}
             aria-owns={route.ariaOwns}
             aria-haspopup={route.ariaPopup}
             onMouseOver={route.mouseOver}
-            sx={{ ...theme.typography.tab }}
+            sx={{
+              ...theme.typography.tab,
+              minWidth: "10px",
+              marginRight: "25px",
+            }}
           />
         ))}
 
@@ -321,7 +361,15 @@ export default function Header(props) {
         to="/estimate"
         color="secondary"
         className={classes.button}
-        sx={{ ...theme.typography.estimate }}
+        sx={{
+          ...theme.typography.estimate,
+          marginLeft: "50px",
+          marginRight: "25px",
+          height: "45px",
+
+          borderRadius: "50px",
+        }}
+        onClick={() => props.setValue(5)}
       >
         Free Estimate
       </Button>
@@ -331,9 +379,12 @@ export default function Header(props) {
         open={openMenu}
         onClose={handleClose}
         classes={{ paper: classes.menu }}
+        PaperProps={{
+          sx: { backgroundColor: theme.palette.common.blue },
+        }}
         MenuListProps={{ onMouseLeave: handleClose }}
         elevation={0}
-        style={{ zIndex: 1300 }}
+        style={{ zIndex: 1302 }}
         keepMounted
       >
         {/* <MenuItem
@@ -384,18 +435,18 @@ export default function Header(props) {
         {/* ********* */}
         {/* //using map filter// */}
 
-        {menuOption.map((option, i) => (
+        {menuOptions.map((option, i) => (
           <MenuItem
-            key={option}
+            key={`${option}${i}`}
             component={Link}
             to={option.Link}
             classes={{ root: classes.menuItem }}
             onClick={(event) => {
               handleMenuItemsClick(event, i);
-              setValue(1);
+              props.setValue(1);
               handleClose();
             }}
-            selected={i === selectedIndex && value === 1}
+            selected={i === props.selectedIndex && props.value === 1}
             sx={{ ...theme.typography.tab }}
           >
             {option.name}
@@ -415,13 +466,17 @@ export default function Header(props) {
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
         classes={{ paper: classes.drawer }}
+        //next method//
+        PaperProps={{
+          sx: { backgroundColor: theme.palette.common.blue },
+        }}
       >
         <div className={classes.toolbarMargin} />
         <List disablePadding>
           {routes.map((route) => (
             <ListItem
               divider
-              key={`${route}${route.activeIndex}`}
+              key={`$(route)${route.activeIndex}`}
               button
               component={Link}
               to={route.link}
@@ -432,11 +487,127 @@ export default function Header(props) {
                 props.setValue(route.activeIndex);
               }}
             >
-              <ListItemText className={classes.drawerItem} disableTypography>
+              <ListItemText
+                // classesName={classes.drawerItem}
+                sx={{ ...theme.typography.tab, opacity: 0.7 }}
+                disableTypography
+              >
                 {route.name}
               </ListItemText>
             </ListItem>
           ))}
+          {/* <ListItem
+            onClick={() => {
+              setOpenDrawer(false);
+              setValue(0);
+            }}
+            divider
+            button
+            component={Link}
+            to="/"
+            selected={value === 0}
+          >
+            <ListItemText
+              className={
+                value === 0
+                  ? [classes.drawerItem, classes.drawerItemSelected]
+                  : classes.drawerItem
+              }
+              disableTypography
+            >
+              Home
+            </ListItemText>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              setOpenDrawer(false);
+              setValue(1);
+            }}
+            divider
+            button
+            component={Link}
+            to="/services"
+            selected={value === 1}
+          >
+            <ListItemText
+              className={
+                value === 1
+                  ? [classes.drawerItem, classes.drawerItemSelected]
+                  : classes.drawerItem
+              }
+              disableTypography
+            >
+              Services
+            </ListItemText>
+          </ListItem>
+
+          <ListItem
+            onClick={() => {
+              setOpenDrawer(false);
+              setValue(2);
+            }}
+            divider
+            button
+            component={Link}
+            to="/revolution"
+            selected={value === 2}
+          >
+            <ListItemText
+              className={
+                value === 2
+                  ? [classes.drawerItem, classes.drawerItemSelected]
+                  : classes.drawerItem
+              }
+              disableTypography
+            >
+              The Revolution
+            </ListItemText>
+          </ListItem>
+
+          <ListItem
+            onClick={() => {
+              setOpenDrawer(false);
+              setValue(3);
+            }}
+            divider
+            button
+            component={Link}
+            to="/about"
+            selected={value === 3}
+          >
+            <ListItemText
+              className={
+                value === 3
+                  ? [classes.drawerItem, classes.drawerItemSelected]
+                  : classes.drawerItem
+              }
+              disableTypography
+            >
+              About Us
+            </ListItemText>
+          </ListItem>
+          <ListItem
+            onClick={() => {
+              setOpenDrawer(false);
+              setValue(4);
+            }}
+            divider
+            button
+            component={Link}
+            to="/contact"
+            selected={value === 4}
+          >
+            <ListItemText
+              className={
+                value === 4
+                  ? [classes.drawerItem, classes.drawerItemSelected]
+                  : classes.drawerItem
+              }
+              disableTypography
+            >
+              Contact
+            </ListItemText>
+          </ListItem> */}
           <ListItem
             onClick={() => {
               setOpenDrawer(false);
@@ -445,13 +616,14 @@ export default function Header(props) {
             divider
             button
             component={Link}
+            // className={[classes.drawerItemEstimate]}
             classes={{
               root: classes.drawerItemEstimate,
               selected: classes.drawerItemSelected,
             }}
+            sx={{ backgroundColor: theme.palette.common.orange }}
             to="/estimate"
             selected={props.value === 5}
-            sx={{ backgroundColor: theme.palette.common.orange }}
           >
             <ListItemText className={classes.drawerItem} disableTypography>
               Free Estimate
@@ -461,10 +633,11 @@ export default function Header(props) {
       </SwipeableDrawer>
       <IconButton
         className={classes.drawerIconContainer}
+        sx={{ marginLeft: "auto" }}
         onClick={() => setOpenDrawer(!openDrawer)}
         disableRipple
       >
-        <MenuIcon />
+        <MenuIcon sx={{ height: "50px", width: "50px" }} />
       </IconButton>
     </React.Fragment>
   );
@@ -472,14 +645,19 @@ export default function Header(props) {
   return (
     <React.Fragment>
       <ElevationScroll>
-        <AppBar position="fixed" className={classes.appbar}>
+        <AppBar
+          position="fixed"
+          className={classes.appbar}
+          sx={{ zIndex: theme.zIndex.modal + 1 }}
+        >
           <Toolbar disableGutters>
             <Button
               component={Link}
               to="/"
               disableRipple
+              sx={{ padding: 0 }}
               className={classes.logoContainer}
-              onClick={() => setValue(0)}
+              onClick={() => props.setValue(0)}
             >
               <img alt="company logo" className={classes.logo} src={logo} />
             </Button>

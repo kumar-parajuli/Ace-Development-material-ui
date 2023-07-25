@@ -155,6 +155,7 @@ export default function CustomSoftware(props) {
         direction="row"
         justifyContent="center"
         style={{ marginTop: "15em", marginBottm: "20em" }}
+        
       >
         <Grid
           item
@@ -164,7 +165,7 @@ export default function CustomSoftware(props) {
           alignItems="center"
           style={{ maxWidth: "40em" }}
         >
-          <Grid item>
+          <Grid item >
             <Typography variant="h4">Save Energy</Typography>
           </Grid>
           <Grid item>
